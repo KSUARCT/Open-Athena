@@ -1,0 +1,43 @@
+import math
+x = input("Pixels from the top left corner of the image on the X axis")
+y = input("Pixles from the top left corner of the image on the Y axis")
+focalLength = input("Focal length of lens")
+mmWidthPerPixel = input("Width per pixel in mm")
+pixelAspectRatio = input("Aspect ratio of each pixel")
+imageWidth = input("Width of image")
+imageHeight = input("Height of image")
+ccdWidthPixels = input("CCD Width Pixels")
+ccdHeightPixels = inout("CCD Height Pixels")
+digitalZoomRatio = input("Digital zoom ratio of image, set to 1 if uncropped.")
+scaleRatio = imageWidth * digitalZoomRatio / ccdWidthPixels
+alphaX = focalLength/mmWidthPerPixel
+alphaY = alphaX/pixelAspectRatio
+fx = alphaX
+fy = alphaY
+cx = imageWidth/2.0
+cy = imageHeight/2.0
+xDisorted = x - cx
+yDistorted = y - cy
+yNormalized = (yDistorted)/fy
+xNormalized = (xDistorted)/fx
+yUndistorted = yDistorted
+xUndisorted = xDistorted
+k1 = input("Radial Distortion of lens R1")
+k2 = input("Radial Distortion of lens R2")
+k3 = input("Radial Distortion of lens R3")
+p1 = input("Tangential distortion of lens T1")
+p2 = input("Tangential distortion of lens T2")
+r2 = (xNormalized*xNormalized)+ (yNormalized*yNormalized)
+r4 = r2 * r2
+xCorrectedNormalized = xNormalized * (1 + k1 * r2 + k2 * r4)
+yCorrectedNormalized = yNormalized * (1 + k1 * r2 + k2 * r4)
+
+xCorrectedNormalized = xCorrectedNormalized + (2 * p1 * xNormalized * yNormalized + p2 * (r2 + 2 * xNormalized * xNormalized))
+yCorrectedNormalized = yCorrectedNormalized + (p1 * (r2 + 2 * yNormalized * yNormalized) + 2 * p2 * xNormalized * yNormalized)
+xUndisorted = xCorrectedNormalized * fx
+yUndistorted = yCorrectedNormalized * fy
+azimuth = math.atan2(xUndistorted, fx)
+elevation = math.atan2(yUndistorted, fy)
+
+adjustAzimith = math.degrees(azimuth)
+adjustElevation = math.degrees(elevation)

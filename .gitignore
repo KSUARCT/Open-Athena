@@ -1,0 +1,25 @@
+# .gitignore
+*.pyc
+*~
+\#*\#
+.\#*headless_output.xt
+.\#EIO*
+.\#*
+.DS_Store
+DJI_*.JPG
+*.ATHENA
+skydio*.jpg
+*.tif
+*.tfw
+Disco_*
+MAX_*
+parrot*.jpg
+*.dt0
+*.dt1
+*.dt2
+*.dir
+*.gaz
+*.hsh
+*.key
+dmed.*
+Read.me
