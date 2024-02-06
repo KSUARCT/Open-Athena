@@ -12,7 +12,7 @@ def main():
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
-    DEMFILENAME = "cobb.tif"
+    DEMFILENAME = "monroe_NY.tif"
     latitude = float(input("Latitude "))
     longitude = float(input("Longitude "))
     altitude = float(input("Altitude ")) # altitude must be in EGM96 vertical datum, not WGS84
@@ -23,7 +23,16 @@ def main():
     theta = float(input("Theta "))
     pixelX = float(input("X axis pixel selection "))
     pixelY = float(input("Y axis pixel selection "))
-    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,24,2000,0,4000,2250,0,1,0,0,0,0)
+    focalLength = float(input("focal length "))
+    imageWidth = float(input("image width "))
+    imageHeight = float(input("image Height "))
+    rollAngle = float(input("rollAngle "))
+    k1 = float(input("k1 "))
+    k2 = float(input("k2 "))
+    p1 = float(input("p1 "))
+    p2 = float(input("p2 "))
+
+    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,focalLength,4056,3040,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2)
     offsetAzimuth, offsetTheta = AzimuthTheta
     print(offsetAzimuth)
     print(offsetTheta)
