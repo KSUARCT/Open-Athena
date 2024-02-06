@@ -1,5 +1,5 @@
 import math
-def test(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2):
+def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2):
 
     #xa = float(input("Pixels from the top left corner of the image on the X axis "))
     #ya = float(input("Pixles from the top left corner of the image on the Y axis "))
@@ -77,4 +77,4 @@ def test(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeigh
 
     print(correctedPsi)
     print(correctedTheta)
-test(0,1125,24,2000,0,4000,2250,0,1,0,0,0,0)
+    return correctedPsi, correctedTheta

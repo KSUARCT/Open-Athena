@@ -7,20 +7,30 @@ from geotiff import GeoTiff
 
 from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUser, getGeoFileFromString
 from getTarget import *
-
+from AzimuthThetaOffset import *
 def main():
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
     DEMFILENAME = "cobb.tif"
-    latitude = input("Latitude")
-    longitude = input("Longitude")
-    altitude = input("Altitude") # altitude must be in EGM96 vertical datum, not WGS84
+    latitude = float(input("Latitude "))
+    longitude = float(input("Longitude "))
+    altitude = float(input("Altitude ")) # altitude must be in EGM96 vertical datum, not WGS84
     # azimuth represents the direction of the aircraft's camera.
     # Starts from North @ 0°, increasing clockwise (e.g. 90° is East)
-    azimuth = input("Azimuth")
+    azimuth = float(input("Azimuth "))
     # theta represents degrees downwards from the horizon (forwards)
-    theta = input("Theta")
+    theta = float(input("Theta "))
+    pixelX = float(input("X axis pixel selection "))
+    pixelY = float(input("Y axis pixel selection "))
+    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,24,2000,0,4000,2250,0,1,0,0,0,0)
+    offsetAzimuth, offsetTheta = AzimuthTheta
+    print(offsetAzimuth)
+    print(offsetTheta)
+    offsetAzimuth = float(offsetAzimuth)
+    offsetAzimuth = float(offsetTheta)
+    azimuth = azimuth-offsetAzimuth
+    theta = theta-offsetTheta
 
     # Load GeoTIFF Digital Elevation Model and its parameters
     elevationData, (x0, dx, dxdy, y0, dydx, dy) = getGeoFileFromString(DEMFILENAME)
@@ -31,12 +41,14 @@ def main():
     yParams = (y0, y1, dy, nrows)
 
     # calculate target
-    target = resolveTarget(latitude, longitude, altitude, azimuth, theta, elevationData, xParams, yParams)
+    target = resolveTarget(latitude, longitude, altitude,  azimuth, theta, elevationData, xParams, yParams)
 
     # break out tuple representing target into component parts
     slantRangeToTarget, targetLat, targetLon, targetAlt, terrainAlt = target
 
     # print out the results. Replace this with whatever output format you desire.
+    print(azimuth)
+    print(theta)
     print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
     print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
     print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters')
