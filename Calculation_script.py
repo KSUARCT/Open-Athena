@@ -38,7 +38,7 @@ def main():
     print(offsetTheta)
     offsetAzimuth = decimal.Decimal(offsetAzimuth)
     offsetTheta = decimal.Decimal(offsetTheta)
-    azimuth = azimuth-offsetAzimuth
+    azimuth = azimuth+offsetAzimuth
     theta = theta-offsetTheta
 
     # Load GeoTIFF Digital Elevation Model and its parameters
