@@ -8,34 +8,35 @@ decimal.getcontext().prec = 30
 from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUser, getGeoFileFromString
 from getTarget import *
 from AzimuthThetaOffset import *
-def main():
+def OpenAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
-    DEMFILENAME = "monroe_NY.tif"
-    latitude = decimal.Decimal(input("Latitude "))
-    longitude = decimal.Decimal(input("Longitude "))
-    altitude = decimal.Decimal(input("Altitude ")) # altitude must be in EGM96 vertical datum, not WGS84
+    DEMFILENAME = "cobb.tif"
+    latitude = decimal.Decimal(lat)
+    longitude = decimal.Decimal(long)
+    altitude = decimal.Decimal(alt) # altitude must be in EGM96 vertical datum, not WGS84
     # azimuth represents the direction of the aircraft's camera.
     # Starts from North @ 0°, increasing clockwise (e.g. 90° is East)
-    azimuth = decimal.Decimal(input("Azimuth "))
+    azimuth = decimal.Decimal(azi)
     # theta represents degrees downwards from the horizon (forwards)
-    theta = decimal.Decimal(input("Theta "))
-    pixelX = decimal.Decimal(input("X axis pixel selection "))
-    pixelY = decimal.Decimal(input("Y axis pixel selection "))
-    focalLength = decimal.Decimal(input("focal length "))
-    imageWidth = decimal.Decimal(input("image width "))
-    imageHeight = decimal.Decimal(input("image Height "))
-    rollAngle = decimal.Decimal(input("rollAngle "))
-    k1 = decimal.Decimal(input("k1 "))
-    k2 = decimal.Decimal(input("k2 "))
-    p1 = decimal.Decimal(input("p1 "))
-    p2 = decimal.Decimal(input("p2 "))
+    theta = decimal.Decimal(theta)
+    pixelX = decimal.Decimal(pixelX)
+    pixelY = decimal.Decimal(pixelY)
+    focalLength = decimal.Decimal(focalLength)
+    imageWidth = decimal.Decimal(imageWidth)
+    imageHeight = decimal.Decimal(imageHeight)
+    rollAngle = decimal.Decimal(rollAngle)
+    k1 = decimal.Decimal(k1)
+    k2 = decimal.Decimal(k2)
+    p1 = decimal.Decimal(p2)
+    p2 = decimal.Decimal(p2)
+    pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
 
-    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,focalLength,4056,3040,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2)
+    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,focalLength,4056,3040,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2, pixelAspectRatio)
     offsetAzimuth, offsetTheta = AzimuthTheta
-    print(offsetAzimuth)
-    print(offsetTheta)
+    #print(offsetAzimuth)
+    #print(offsetTheta)
     offsetAzimuth = decimal.Decimal(offsetAzimuth)
     offsetTheta = decimal.Decimal(offsetTheta)
     azimuth = azimuth+offsetAzimuth
@@ -56,12 +57,12 @@ def main():
     slantRangeToTarget, targetLat, targetLon, targetAlt, terrainAlt = target
 
     # print out the results. Replace this with whatever output format you desire.
-    print(azimuth)
-    print(theta)
-    print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
-    print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
-    print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters')
+    #print(azimuth)
+    #print(theta)
+    #print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
+    #print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
+    #print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters')
+    return ((round(targetLat,6), round(targetLon,6), round(targetAlt,6)))
 
-
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()

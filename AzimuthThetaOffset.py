@@ -1,7 +1,7 @@
 import math
 import decimal
 decimal.getcontext().prec = 30
-def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2):
+def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
 
     #xa = decimal.Decimal(input("Pixels from the top left corner of the image on the X axis "))
     #ya = decimal.Decimal(input("Pixles from the top left corner of the image on the Y axis "))
@@ -22,7 +22,7 @@ def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWi
     roll = decimal.Decimal(roll)
     digitalZoomRatio = decimal.Decimal(digitalZoomRatio)
 
-    pixelAspectRatio = decimal.Decimal(4/3)
+    pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
     #scaleRatio = imageWidth * digitalZoomRatio / mmWidthPerPixel
     alphaX = (imageWidth * digitalZoomRatio) * focalLength / decimal.Decimal(36.0) 
     alphaX = decimal.Decimal(alphaX)
@@ -59,8 +59,8 @@ def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWi
 
     azimuth = math.degrees(azimuth)
     elevation = math.degrees(elevation)
-    print(azimuth)
-    print(elevation)
+    #print(azimuth)
+    #print(elevation)
     psi = azimuth
     theta = elevation
     cameraRoll = roll
@@ -80,6 +80,6 @@ def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWi
     correctedTheta = correctedTheta * -1
 
 
-    print(correctedPsi)
-    print(correctedTheta)
+    #print(correctedPsi)
+    #print(correctedTheta)
     return correctedPsi, correctedTheta
