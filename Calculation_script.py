@@ -8,7 +8,7 @@ decimal.getcontext().prec = 30
 from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUser, getGeoFileFromString
 from getTarget import *
 from AzimuthThetaOffset import *
-def OpenAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
+def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
@@ -66,3 +66,5 @@ def OpenAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
 
 #if __name__ == "__main__":
 #    main()
+def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
+    openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 25, 4208, 3120, rollAngle, 0, 0, 0, 0, 1)
