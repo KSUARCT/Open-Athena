@@ -4,7 +4,7 @@ import math
 from math import sin, asin, cos, atan2, sqrt
 import decimal # more float precision with Decimal objects
 from geotiff import GeoTiff
-
+decimal.getcontext().prec = 30
 from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUser, getGeoFileFromString
 from getTarget import *
 from AzimuthThetaOffset import *

@@ -1,5 +1,6 @@
 import math
 import decimal
+decimal.getcontext().prec = 30
 def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2):
 
     #xa = decimal.Decimal(input("Pixels from the top left corner of the image on the X axis "))
