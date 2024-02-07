@@ -101,7 +101,7 @@ def getTarget():
             print(f'Approximate WGS84 alt (constructed): {math.ceil(tarZ)}')
         else:
             # edge case where drone camera is pointed straight down
-            tarZ = float(terrainAlt)
+            tarZ = decimal.Decimal(terrainAlt)
         print(f'Approximate alt (terrain): {round(terrainAlt)}\n')
 
         print('Target:')
@@ -329,6 +329,7 @@ def resolveTarget(y, x, z, azimuth, theta, elevationData, xParams, yParams):
     # may be inaccurate for very very large horizontal distances
     finalDist = sqrt(finalHorizDist ** 2 + finalVertDist ** 2)
     terrainAlt = parseGeoTIFF.getAltFromLatLon(curY, curX, xParams, yParams, elevationData)
+    terrainAlt = decimal.Decimal(terrainAlt)
 
     return((finalDist, curY, curX, curZ, terrainAlt))
 

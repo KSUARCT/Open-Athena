@@ -62,9 +62,12 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     #print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
     #print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
     #print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters')
+    targetAlt = decimal.Decimal(targetAlt)
     return ((round(targetLat,6), round(targetLon,6), round(targetAlt,6)))
 
 #if __name__ == "__main__":
 #    main()
 def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
-    openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 25, 4208, 3120, rollAngle, 0, 0, 0, 0, 1)
+    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 24, 4000, 2250, rollAngle, 0, 0, 0, 0, 1)
+
+print(Targeting(33.837189, -84.53877, 418, 172, -36, 2000, 1125, 0))
