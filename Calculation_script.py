@@ -8,6 +8,8 @@ decimal.getcontext().prec = 30
 from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUser, getGeoFileFromString
 from getTarget import *
 from AzimuthThetaOffset import *
+import pyproj
+
 def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
@@ -15,6 +17,11 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     DEMFILENAME = "cobb.tif"
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
+    alt = decimal.Decimal(alt)
+    #WGS84 = pyproj.CRS.from_epsg(4326)
+    #EGM96 = pyproj.CRS.from_epsg(5773)
+    #trs = pyproj.Transformer.from_crs(WGS84, EGM96)
+    #EGMLat, EGMLong, alt = trs.transform(latitude, longitude, alt)
     altitude = decimal.Decimal(alt) # altitude must be in EGM96 vertical datum, not WGS84
     # azimuth represents the direction of the aircraft's camera.
     # Starts from North @ 0°, increasing clockwise (e.g. 90° is East)
@@ -68,6 +75,6 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
 #if __name__ == "__main__":
 #    main()
 def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
-    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 24, 4000, 2250, rollAngle, 0, 0, 0, 0, 1)
+    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 21, 4056, 3040, rollAngle, .134437, -.24607, -0.000175531, -0.000580392, 1)
 
-print(Targeting(33.837189, -84.53877, 418, 172, -36, 2000, 1125, 0))
+print(Targeting(43.164885, -77.471996, 174.565, 250, -26, 2028, 1520, 0.483809))
