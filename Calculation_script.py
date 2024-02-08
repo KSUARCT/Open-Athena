@@ -68,13 +68,25 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     #print(theta)
     #print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
     #print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
-    #print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters')
-    targetAlt = decimal.Decimal(targetAlt)
+    #print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters'
     return ((round(targetLat,6), round(targetLon,6), round(targetAlt,6)))
 
 #if __name__ == "__main__":
 #    main()
 def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
+    """
+    lat = Latitude of plane in decimal format
+    long = Longitude of plane in decimal format
+    alt = Altitude of plane in EGM96 format 
+    azi = Degrees camera is facing - 0 is north, 180 is south, 90 is east, 270 is west.
+    theta = Angle camera is facing downwards. Make sure to add plane inclination downwards as well - otherwise results may be innacurate.
+    pixelX = The pixels from the top left of the image of the target on the X axis.
+    pixelY = The pixels from the top left of the image of the target on the Y axis.
+    rollAngle = the yaw of the plane.
+    """
     return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 21, 4056, 3040, rollAngle, .134437, -.24607, -0.000175531, -0.000580392, 1)
 
-print(Targeting(43.164885, -77.471996, 174.565, 250, -26, 2028, 1520, 0.483809))
+latt, longg, altt = Targeting(43.164885, -77.471996, 174.565, 250, -26, 2028, 1520, 0.483809)
+print(latt)
+print(longg)
+print(altt)
