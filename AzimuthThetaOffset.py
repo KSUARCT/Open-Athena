@@ -37,6 +37,7 @@ def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoom
 
     pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
     #scaleRatio = imageWidth * digitalZoomRatio / mmWidthPerPixel
+    # Honestly, from here on out I don't even understand what it's doing so it's best that you don't touch it.
     alphaX = (imageWidth * digitalZoomRatio) * focalLength / decimal.Decimal(36.0) 
     alphaX = decimal.Decimal(alphaX)
     alphaY = alphaX / pixelAspectRatio
@@ -52,11 +53,6 @@ def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoom
     yNormalized = yDistorted/fy
     xUndistorted = xDistorted
     yUndistorted = yDistorted
-    #k1 = decimal.Decimal(input("Radial Distortion of lens R1 "))
-    #k2 = decimal.Decimal(input("Radial Distortion of lens R2 "))
-    #k3 = decimal.Decimal(input("Radial Distortion of lens R3 "))
-    #p1 = decimal.Decimal(input("Tangential distortion of lens T1 "))
-    #p2 = decimal.Decimal(input("Tangential distortion of lens T2 ")) 
     x = xNormalized
     y = yNormalized
     r2 = x*x + y*y
@@ -72,8 +68,7 @@ def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoom
 
     azimuth = math.degrees(azimuth)
     elevation = math.degrees(elevation)
-    #print(azimuth)
-    #print(elevation)
+    # Roll correction. Again, I don't understand this so I wouldn't touch it.
     psi = azimuth
     theta = elevation
     cameraRoll = roll
