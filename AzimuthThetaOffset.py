@@ -1,8 +1,21 @@
 import math
 import decimal
 decimal.getcontext().prec = 30
-def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
-
+def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
+    """
+    xa: Pixels from top left corner of image on X axis.
+    ya: Pixels from top left corner of image on Y axis.
+    focalLength: 35mm equivalent focal length.
+    imageWidth: use your imagination: Width of image
+    imageHeight: use your imagination: Height of image
+    roll: be creative here. Roll of camera
+    digitalZoomRatio: the zoom of the camera.
+    k1: Camera distortion 
+    k2: Camera distortion
+    p1: Camera distortion
+    p2: Camera distortion
+    pixelAspectRatio: Commonly 4/3 or 1. Make sure you pass 4/3 as float(4/3)
+    """
     #xa = decimal.Decimal(input("Pixels from the top left corner of the image on the X axis "))
     #ya = decimal.Decimal(input("Pixles from the top left corner of the image on the Y axis "))
     #focalLength = decimal.Decimal(input("Focal length of lens in 35mm format "))
@@ -12,15 +25,15 @@ def AzimuthThetaOffset(xa,ya,focalLength,mmWidthPerPixel,ccdHeightPixels,imageWi
     #imageHeight = decimal.Decimal(input("Height of image "))
     #roll = decimal.Decimal(input("roll"))
     #digitalZoomRatio = decimal.Decimal(input("Digital zoom ratio of image, set to 1 if uncropped. "))
-    xa = decimal.Decimal(xa)
-    ya = decimal.Decimal(ya)
-    focalLength = decimal.Decimal(focalLength)
-    mmWidthPerPixel = decimal.Decimal(mmWidthPerPixel)
-    ccdHeightPixels = decimal.Decimal(ccdHeightPixels)
-    imageWidth = decimal.Decimal(imageWidth)
-    imageHeight = decimal.Decimal(imageHeight)
-    roll = decimal.Decimal(roll)
-    digitalZoomRatio = decimal.Decimal(digitalZoomRatio)
+    xa = decimal.Decimal(xa) # Pixels from the top left corner of the image on the X axis
+    ya = decimal.Decimal(ya) # Pixels from the top left corner of the image on the Y axis
+    focalLength = decimal.Decimal(focalLength) # Focal length 35mm equivalent
+    #mmWidthPerPixel = decimal.Decimal(mmWidthPerPixel) #Width per pixel in MM
+    #ccdHeightPixels = decimal.Decimal(ccdHeightPixels) #Height per pixel in MM
+    imageWidth = decimal.Decimal(imageWidth) #Width of image
+    imageHeight = decimal.Decimal(imageHeight) #Height of image
+    roll = decimal.Decimal(roll) #Roll of camera
+    digitalZoomRatio = decimal.Decimal(digitalZoomRatio) # Digital zoom of image, set to 1 if uncropped.
 
     pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
     #scaleRatio = imageWidth * digitalZoomRatio / mmWidthPerPixel

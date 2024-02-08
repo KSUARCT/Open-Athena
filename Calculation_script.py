@@ -14,7 +14,7 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
-    DEMFILENAME = "cobb.tif"
+    DEMFILENAME = "monroe_NY.tif"
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
     alt = decimal.Decimal(alt)
@@ -40,7 +40,7 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     p2 = decimal.Decimal(p2)
     pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
 
-    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,focalLength,4056,3040,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2, pixelAspectRatio)
+    AzimuthTheta = AzimuthThetaOffset(pixelX,pixelY,focalLength,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2, pixelAspectRatio)
     offsetAzimuth, offsetTheta = AzimuthTheta
     #print(offsetAzimuth)
     #print(offsetTheta)
