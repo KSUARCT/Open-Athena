@@ -7,7 +7,7 @@ def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoom
     ya: Pixels from top left corner of image on Y axis.
     focalLength: 35mm equivalent focal length.
     imageWidth: use your imagination: Width of image
-    imageHeight: use your imagination: Height of image
+    imageHeight: again, use your imagination: Height of image
     roll: be creative here. Roll of camera
     digitalZoomRatio: the zoom of the camera.
     k1: Camera distortion 
