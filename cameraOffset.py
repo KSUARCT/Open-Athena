@@ -1,7 +1,7 @@
 import math
 import decimal
 decimal.getcontext().prec = 30
-def AzimuthThetaOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
+def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
     """
     xa: Pixels from top left corner of image on X axis.
     ya: Pixels from top left corner of image on Y axis.
