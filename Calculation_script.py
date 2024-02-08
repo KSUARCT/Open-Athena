@@ -83,6 +83,8 @@ def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
     pixelX = The pixels from the top left of the image of the target on the X axis.
     pixelY = The pixels from the top left of the image of the target on the Y axis.
     rollAngle = the yaw of the plane.
+    
+    All inputs are taken as decimals, but any integer or float input will work.
 
     Returns tuple of latitude of target, longitude of target, EGM96 altitude of target, and ground altitude of target.
     """
