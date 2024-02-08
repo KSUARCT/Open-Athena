@@ -69,7 +69,7 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     #print(f'Calculated Target (lat,lon): {round(targetLat, 6)}, {round(targetLon, 6)} Alt: {round(targetAlt, 6)} meters AMSL')
     #print(f'estimated terrainAlt was: {round(terrainAlt,6)}')
     #print(f'Slant Range to Target was: {round(slantRangeToTarget,6)} meters'
-    return ((round(targetLat,6), round(targetLon,6), round(targetAlt,6)))
+    return ((round(targetLat,6), round(targetLon,6), round(targetAlt,6), round(terrainAlt, 6)))
 
 #if __name__ == "__main__":
 #    main()
@@ -83,10 +83,13 @@ def Targeting(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
     pixelX = The pixels from the top left of the image of the target on the X axis.
     pixelY = The pixels from the top left of the image of the target on the Y axis.
     rollAngle = the yaw of the plane.
+
+    Returns tuple of latitude of target, longitude of target, EGM96 altitude of target, and ground altitude of target.
     """
     return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 21, 4056, 3040, rollAngle, .134437, -.24607, -0.000175531, -0.000580392, 1)
 
-latt, longg, altt = Targeting(43.164885, -77.471996, 174.565, 250, -26, 2028, 1520, 0.483809)
+latt, longg, altt, terr = Targeting(43.164885, -77.471996, 174.565, 250, -26, 2028, 1520, 0.483809)
 print(latt)
 print(longg)
 print(altt)
+print(terr)
