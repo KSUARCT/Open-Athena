@@ -14,7 +14,7 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
-    DEMFILENAME = "cobb.tif"
+    DEMFILENAME = "georgia.tif"
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
     alt = decimal.Decimal(alt)
@@ -87,3 +87,5 @@ def targetLocation(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
     Returns tuple of latitude of target, longitude of target, EGM96 altitude of target, and ground altitude of target.
     """
     return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 21, 4056, 3040, rollAngle, 0, 0,0, 0, 1)
+x,y,z,a = targetLocation(33, -84, 500, 180, 89, 2028, 1520, 0)
+print(x, y, z, a)
