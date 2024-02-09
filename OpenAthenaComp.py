@@ -9,12 +9,31 @@ from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUs
 from getTarget import *
 from cameraOffset import *
 #import pyproj
+global focalLength
+global imageWidth
+global imageHeight
+global k1
+global k2
+global p1
+global p2 
+global pixelAspectRatio 
+global DEMFILENAME
+
+def setVariables(focalLength, imageWidth, imageHeight, k1, k2, p1, p2, pixelAspectRatio, DEMFILENAME):
+    focalLength = focalLength
+    imageWidth = imageWidth
+    imageHeight = imageHeight
+    k1 = decimal.Decimal(k1)
+    k2 = decimal.Decimal(k2)
+    p1 = decimal.Decimal(p1)
+    p2 = decimal.Decimal(p2) 
+    pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
+    DEMFILENAME = DEMFILENAME
 
 def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
     # replace this with filename of DEM you wish to use.
     #     if it is not in the same directory as this script, you will need to
     #     provide a complete file path.
-    DEMFILENAME = "northGA.tif"
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
     alt = decimal.Decimal(alt)
@@ -86,6 +105,4 @@ def targetLocation(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
 
     Returns tuple of latitude of target, longitude of target, EGM96 altitude of target, and ground altitude of target.
     """
-    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, 21, 4056, 3040, rollAngle, 0, 0,0, 0, 1)
-x,y,z,a = targetLocation(35, -83, 1200, 147, 10, 2028, 1520, 0)
-print(x, y, z, a)
+    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, focalLength, imageWidth, imageHeight, rollAngle, k1, k2,p1, p2, pixelAspectRatio)
