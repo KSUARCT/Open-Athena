@@ -9,31 +9,47 @@ from parseGeoTIFF import getAltFromLatLon, binarySearchNearest, getGeoFileFromUs
 from getTarget import *
 from cameraOffset import *
 #import pyproj
-global focalLength
-global imageWidth
-global imageHeight
-global k1
-global k2
-global p1
-global p2 
-global pixelAspectRatio 
-global DEMFILENAME
+focalLength = 21
+imageWidth = 4056
+imageHeight = 3040
+k1 = 0
+k2 = 0 
+p1 = 0 
+p2 = 0 
+pixelAspectRatio = 1 
+DEMFILENAME = "northGA.tif"
 
-def setVariables(focalLength, imageWidth, imageHeight, k1, k2, p1, p2, pixelAspectRatio, DEMFILENAME):
-    focalLength = focalLength
-    imageWidth = imageWidth
-    imageHeight = imageHeight
-    k1 = decimal.Decimal(k1)
-    k2 = decimal.Decimal(k2)
-    p1 = decimal.Decimal(p1)
-    p2 = decimal.Decimal(p2) 
-    pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
-    DEMFILENAME = DEMFILENAME
-
+def setVariables(focal, Width, Height, ka1, ka2, pa1, pa2, pixelAspectRatios, DEMFILENAMES):
+    """
+    focal = Focal length of camera in 35mm equivalent.
+    Width = width of image.
+    Height = height of image.
+    ka1 = camera intrinsics k1, set to 0 if unknown.
+    ka2 = camera intrinsics k2, set to 0 if unknown.
+    pa1 = camera intrinsics p1, set to 0 if unknown.
+    pa2 = camera intrinsics p2, set to 0 if unknown.
+    pixelAspectRatios = aspect ratio of pixel, typically 1 or 4/3.
+    DEMFILENAMES = file name of DEM, make sure to use full file path if not in same directory.
+    """
+    global focalLength
+    global imageWidth
+    global imageHeight
+    global k1
+    global k2
+    global p1
+    global p2
+    global pixelAspectRatio
+    global DEMFILENAME
+    focalLength = decimal.Decimal(focal)
+    imageWidth = decimal.Decimal(Width)
+    imageHeight = decimal.Decimal(Height)
+    k1 = decimal.Decimal(ka1)
+    k2 = decimal.Decimal(ka2)
+    p1 = decimal.Decimal(pa1)
+    p2 = decimal.Decimal(pa2)
+    pixelAspectRatio = decimal.Decimal(pixelAspectRatios)
+    DEMFILENAME = DEMFILENAMES
 def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
-    # replace this with filename of DEM you wish to use.
-    #     if it is not in the same directory as this script, you will need to
-    #     provide a complete file path.
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
     alt = decimal.Decimal(alt)
