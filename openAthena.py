@@ -20,7 +20,7 @@ p2 = 0
 pixelAspectRatio = 1 
 DEMFILENAME = "northGA.tif"
 
-def setVariables(focal, Width, Height, ka1, ka2, ka3, pa1, pa2, pixelAspectRatios, DEMFILENAMES):
+def setCamera(focal, Width, Height, ka1, ka2, ka3, pa1, pa2, pixelAspectRatios, DEMFILENAMES):
     """
     focal = Focal length of camera in 35mm equivalent.
     Width = width of image.
@@ -111,7 +111,7 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
 
 #if __name__ == "__main__":
 #    main()
-def targetLocation(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
+def calcCoord(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
     """
     lat = Latitude of plane in decimal format
     long = Longitude of plane in decimal format
