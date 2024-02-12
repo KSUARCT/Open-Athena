@@ -114,7 +114,7 @@ def targetLocation(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
     long = Longitude of plane in decimal format
     alt = Altitude of plane in EGM96 format 
     azi = Degrees camera is facing - 0 is north, 180 is south, 90 is east, 270 is west. Also the yaw of the plane
-    theta = Angle camera is facing downwards. Make sure to add plane inclination downwards as well - otherwise results may be inacurate.
+    theta = Angle camera is facing downwards. Make sure to add plane inclination downwards as well - otherwise results may be inacurate. THIS NUMBER IS NEGATIVE, AND RESULTS MAY BE INACCURATE IF NUMBER IS POSITIVE.
     pixelX = The pixels from the top left of the image of the target on the X axis.
     pixelY = The pixels from the top left of the image of the target on the Y axis.
     rollAngle = the roll of the plane.
