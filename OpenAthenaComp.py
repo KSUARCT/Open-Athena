@@ -13,19 +13,21 @@ focalLength = 21
 imageWidth = 4056
 imageHeight = 3040
 k1 = 0
-k2 = 0 
+k2 = 0
+k3 = 0 
 p1 = 0 
 p2 = 0 
 pixelAspectRatio = 1 
 DEMFILENAME = "northGA.tif"
 
-def setVariables(focal, Width, Height, ka1, ka2, pa1, pa2, pixelAspectRatios, DEMFILENAMES):
+def setVariables(focal, Width, Height, ka1, ka2, ka3, pa1, pa2, pixelAspectRatios, DEMFILENAMES):
     """
     focal = Focal length of camera in 35mm equivalent.
     Width = width of image.
     Height = height of image.
     ka1 = camera intrinsics k1, set to 0 if unknown.
     ka2 = camera intrinsics k2, set to 0 if unknown.
+    ka3 = camera intrinsics k3, set to 0 if unknown.
     pa1 = camera intrinsics p1, set to 0 if unknown.
     pa2 = camera intrinsics p2, set to 0 if unknown.
     pixelAspectRatios = aspect ratio of pixel, typically 1 or 4/3.
@@ -49,7 +51,7 @@ def setVariables(focal, Width, Height, ka1, ka2, pa1, pa2, pixelAspectRatios, DE
     p2 = decimal.Decimal(pa2)
     pixelAspectRatio = decimal.Decimal(pixelAspectRatios)
     DEMFILENAME = DEMFILENAMES
-def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,p1,p2,pixelAspectRatio):
+def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,imageHeight,rollAngle,k1,k2,k3,p1,p2,pixelAspectRatio):
     latitude = decimal.Decimal(lat)
     longitude = decimal.Decimal(long)
     alt = decimal.Decimal(alt)
@@ -71,11 +73,12 @@ def openAthena(lat,long,alt, azi,theta,pixelX, pixelY, focalLength,imageWidth,im
     rollAngle = decimal.Decimal(rollAngle)
     k1 = decimal.Decimal(k1)
     k2 = decimal.Decimal(k2)
+    k3 = decimal.Decimal(k3)
     p1 = decimal.Decimal(p2)
     p2 = decimal.Decimal(p2)
     pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
 
-    AzimuthTheta = cameraOffset(pixelX,pixelY,focalLength,imageWidth,imageHeight,rollAngle,1,k1,k2,p1,p2, pixelAspectRatio)
+    AzimuthTheta = cameraOffset(pixelX,pixelY,focalLength,imageWidth,imageHeight,rollAngle,1,k1,k2,k3,p1,p2, pixelAspectRatio)
     offsetAzimuth, offsetTheta = AzimuthTheta
     #print(offsetAzimuth)
     #print(offsetTheta)
@@ -121,4 +124,4 @@ def targetLocation(lat, long, alt, azi, theta, pixelX, pixelY, rollAngle):
 
     Returns tuple of latitude of target, longitude of target, EGM96 altitude of target, and ground altitude of target.
     """
-    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, focalLength, imageWidth, imageHeight, rollAngle, k1, k2,p1, p2, pixelAspectRatio)
+    return openAthena(lat, long, alt, azi, theta, pixelX, pixelY, focalLength, imageWidth, imageHeight, rollAngle, k1, k2,k3,p1, p2, pixelAspectRatio)
