@@ -3,3 +3,4 @@ matplotlib~=3.5.1
 mgrs~=1.4.5
 pillow~=9.0.1
 imagecodecs
+pyproj

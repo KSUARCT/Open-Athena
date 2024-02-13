@@ -1,7 +1,7 @@
 import math
 import decimal
 decimal.getcontext().prec = 30
-def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,p1,p2,pixelAspectRatio):
+def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,k3, p1,p2,pixelAspectRatio):
     """
     xa: Pixels from top left corner of image on X axis.
     ya: Pixels from top left corner of image on Y axis.
@@ -12,6 +12,7 @@ def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,
     digitalZoomRatio: the zoom of the camera.
     k1: Camera distortion 
     k2: Camera distortion
+    k3: Camera distortion
     p1: Camera distortion
     p2: Camera distortion
     pixelAspectRatio: Commonly 4/3 or 1. Make sure you pass 4/3 as float(4/3)
@@ -57,8 +58,9 @@ def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,
     y = yNormalized
     r2 = x*x + y*y
     r4 = r2 * r2
-    xCorrectedNormalized = x * (1 + k1 * r2 + k2 * r4)
-    yCorrectedNormalized = y * (1 + k1 * r2 + k2 * r4)
+    r6 = r4 * r2
+    xCorrectedNormalized = x * (1 + k1 * r2 + k2 * r4 + k3 * r6)
+    yCorrectedNormalized = y * (1 + k1 * r2 + k2 * r4 + k3 * r6)
     xCorrectedNormalized = xCorrectedNormalized + (2 * p1 * x * y + p2 * (r2 + 2 * x * x))
     yCorrectedNormalized = yCorrectedNormalized + (p1 * (r2 + 2 * y * y) + 2 * p2 * x * y)
     xUndistorted = xCorrectedNormalized * fx
