@@ -1,7 +1,7 @@
 import math
 import decimal
 decimal.getcontext().prec = 30
-def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,k1,k2,k3, p1,p2,pixelAspectRatio):
+def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,zoomRatio,k1,k2,k3, p1,p2,pixelAspectRatio):
     """
     xa: Pixels from top left corner of image on X axis.
     ya: Pixels from top left corner of image on Y axis.
@@ -9,7 +9,7 @@ def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,
     imageWidth: use your imagination: Width of image
     imageHeight: again, use your imagination: Height of image
     roll: be creative here. Roll of camera
-    digitalZoomRatio: the zoom of the camera.
+    zoomRatio: the zoom of the camera.
     k1: Camera distortion 
     k2: Camera distortion
     k3: Camera distortion
@@ -25,7 +25,7 @@ def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,
     #imageWidth = decimal.Decimal(input("Width of image "))
     #imageHeight = decimal.Decimal(input("Height of image "))
     #roll = decimal.Decimal(input("roll"))
-    #digitalZoomRatio = decimal.Decimal(input("Digital zoom ratio of image, set to 1 if uncropped. "))
+    #zoomRatio = decimal.Decimal(input("Digital zoom ratio of image, set to 1 if uncropped. "))
     xa = decimal.Decimal(xa) # Pixels from the top left corner of the image on the X axis
     ya = decimal.Decimal(ya) # Pixels from the top left corner of the image on the Y axis
     focalLength = decimal.Decimal(focalLength) # Focal length 35mm equivalent
@@ -34,12 +34,12 @@ def cameraOffset(xa,ya,focalLength,imageWidth,imageHeight,roll,digitalZoomRatio,
     imageWidth = decimal.Decimal(imageWidth) #Width of image
     imageHeight = decimal.Decimal(imageHeight) #Height of image
     roll = decimal.Decimal(roll) #Roll of camera
-    digitalZoomRatio = decimal.Decimal(digitalZoomRatio) # Digital zoom of image, set to 1 if uncropped.
+    zoomRatio = decimal.Decimal(zoomRatio) # Digital zoom of image, set to 1 if uncropped.
 
     pixelAspectRatio = decimal.Decimal(pixelAspectRatio)
-    #scaleRatio = imageWidth * digitalZoomRatio / mmWidthPerPixel
+    #scaleRatio = imageWidth * zoomRatio / mmWidthPerPixel
     # Honestly, from here on out I don't even understand what it's doing so it's best that you don't touch it.
-    alphaX = (imageWidth * digitalZoomRatio) * focalLength / decimal.Decimal(36.0) 
+    alphaX = (imageWidth * zoomRatio) * focalLength / decimal.Decimal(36.0) 
     alphaX = decimal.Decimal(alphaX)
     alphaY = alphaX / pixelAspectRatio
     fx = alphaX
